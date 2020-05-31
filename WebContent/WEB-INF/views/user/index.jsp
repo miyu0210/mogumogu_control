@@ -18,28 +18,11 @@
                     <tr class="row${status.count % 2}">
                         <td><c:out value="${user.mail}" /></td>
                         <td>
-                            <c:otherwise>
-                                <a href="<c:url value='/user/show?id=${user.id}' />">詳細を表示</a>
-                            </c:otherwise>
-                           
+                            <a href="<c:url value='/user/show?id=${user.id}' />">詳細を表示</a>
                         </td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-        
-        <div id="pagination">
-            (全 ${user_count} 件) <br />
-            <c:forEach var="i" begin="1" end="${((user_count - 1) / 15) + 1}" step="1">
-                <c:choose>
-                    <c:when test="${i == page}">
-                        <c:out value="${i}" />&nbsp;
-                    </c:when>
-                    <c:otherwise>
-                        <a href="<c:url value='/user/index?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </div>
     </c:param>
 </c:import>
