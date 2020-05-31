@@ -4,9 +4,9 @@
     <c:param name="content">
         <c:choose>
             <c:when test="${user != null}">
-                <h2>id : ${user.id} の編集ページ</h2>
-                <p>(パスワードを変更する場合のみ入力してください)</p>
-                <form method="POST" action="c:url value='/user/update' />">
+                <h2>編集ページ</h2>
+                <p>(パスワードは変更する場合のみ入力してください)</p>
+                <form method="POST" action="<c:url value='/user/update' />">
                     <c:import url="_form.jsp" />
                 </form>
                 
@@ -27,6 +27,6 @@
             </c:otherwise>
         </c:choose>
         
-        <p><a href="<c:url value='/topPage/index' />">戻る</a></p>
+        <p><a href="<c:url value='/index.html' />">戻る</a></p>
     </c:param>
 </c:import>
