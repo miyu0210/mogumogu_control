@@ -11,12 +11,15 @@
     <body>
         <div id="weapper">
             <div id="header">
-                <h1>もぐもぐ管理</h1>
+                <h1><a href="<c:url value='/' />">もぐもぐ管理</a></h1>&nbsp;&nbsp;&nbsp;
             </div>
             <div id="content">
                 ${param.content}
             </div>
             <div id="footer">
+                <c:if test="${sessionScope.login_user != null}">
+                <a href="<c:url value='/logout' />">ログアウト</a>
+                </c:if>
             </div>
         </div>
 
