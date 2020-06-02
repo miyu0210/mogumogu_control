@@ -4,7 +4,7 @@
     <c:param name="content">
         <h2>編集ページ</h2>
         
-        <form method="POST" actiom="${pageContext.request.contextPath}/budget/update">
+        <form method="POST" action="${pageContext.request.contextPath}/budget/update">
             <c:import url="_form.jsp" />
         </form>
         
