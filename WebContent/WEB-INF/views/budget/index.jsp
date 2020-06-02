@@ -6,7 +6,7 @@
         <ul>
             <c:forEach var="budget" items="${budget}">
                 <li>
-                    <a href="${pageContext.request.contextPath}/show?id=${budget.id}">
+                    <a href="${pageContext.request.contextPath}/budget/show?id=${budget.id}">
                         <c:out value="${budget.id}" />
                     </a>
                     : <c:out value="${budget.budget}"></c:out>&gt; <c:out value="${budget.startday}" />
