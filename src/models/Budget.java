@@ -16,7 +16,7 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getAllBudget",
             query = "SELECT b FROM Budget AS b ORDER BY b.id DESC"
-            )
+            ),
 })
 @Table(name = "budget")
 

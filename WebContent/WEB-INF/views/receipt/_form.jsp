@@ -7,23 +7,20 @@
         <c:forEach var="error" items="${errors}">
             ・<c:out value="${error}" /><br />
         </c:forEach>
+
     </div>
 </c:if>
 <label for="receipt_date">日付</label><br />
-<input type="date" name="receipt_date" value="<fmt:formatDate value='${receipt.receipt_date}' pattern='yyyy-MM-dd' />">
+<input type="date" name="receipt_date" value="<fmt:formatDate value='${receipt.receipt_date}' pattern='yyyy-MM-dd' />" />
 <br /><br />
 
 <label for="totalamount">金額</label><br />
-<input type="text" name="totalamount" value="${receipt.totalamount}" />
+<input type="text" name="totalamount" value="${receipt.totalamount}" />円
 <br /><br />
 
 <label for="payment">決済方法</label><br />
-<select name="payment">
-    <option value="0"<c:if test="${receipt.payment == 0}"> selected</c:if>>現金</option>
-    <option value="1"<c:if test="${receipt.payment == 1}"> selected</c:if>>ＩＤ</option>
-    <option value="2"<c:if test="${receipt.payment == 2}"> selected</c:if>>ペイ</option>
-</select>
+<input type="text" name="payment" value="${receipt.payment}" />
 <br /><br />
 
 <input type="hidden" name="_token" value="${_token}" />
-<button tupe="submit">登録</button>
+<button type="submit">登録</button>

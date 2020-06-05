@@ -18,6 +18,14 @@ import javax.persistence.Table;
             name = "getAllReceipt",
             query = "SELECT r FROM Receipt AS r ORDER BY r.id DESC"
             ),
+    @NamedQuery(
+            name = "getReceiptCount",
+            query = "SELECT COUNT(r) FROM Receipt AS r"
+            ),
+    @NamedQuery(
+            name = "getReceiptTotal",
+            query = "SELECT SUM(r.totalamount) FROM Receipt r"
+            ),
 })
 @Entity
 public class Receipt {

@@ -1,8 +1,8 @@
 package controllers.receipt;
 
 import java.io.IOException;
-import java.sql.Date;
 
+import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Receipt;
+import utils.DBUtil;
 
 /**
- * Servlet implementation class ReceiptNewServlet
+ * Servlet implementation class ReceiptEditServlet
  */
-@WebServlet("/receipt/new")
-public class ReceiptNewServlet extends HttpServlet {
+@WebServlet("/receipt/edit")
+public class ReceiptEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReceiptNewServlet() {
+    public ReceiptEditServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +32,18 @@ public class ReceiptNewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    request.setAttribute("_token", request.getSession().getId());
-	    
-	    Receipt r = new Receipt();
-	    
-	    r.setReceipt_date(new Date(System.currentTimeMillis()));
-	    request.setAttribute("receipt", r);
-	    
-	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/receipt/new.jsp");
-	    rd.forward(request, response);
-	}
+		EntityManager em = DBUtil.createEntityManager();
+		
+		Receipt r = em.find(Receipt.class, Integer.parseInt(request.getParameter("id")));
+		
+		em.close();
+		
+		request.setAttribute("receipt", r);
+		request.setAttribute("_token", request.getSession().getId());
+		request.getSession().setAttribute("receipt_id", r.getId());
+	
+	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/receipt/edit.jsp");
+	rd.forward(request, response);
 
+}
 }

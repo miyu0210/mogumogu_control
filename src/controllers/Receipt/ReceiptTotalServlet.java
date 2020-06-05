@@ -15,16 +15,16 @@ import models.Receipt;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReceiptIndexServlet
+ * Servlet implementation class ReceiptTotalServlet
  */
-@WebServlet("/receipt/index")
-public class ReceiptIndexServlet extends HttpServlet {
+@WebServlet("/receipt/total")
+public class ReceiptTotalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReceiptIndexServlet() {
+    public ReceiptTotalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +34,22 @@ public class ReceiptIndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    EntityManager em = DBUtil.createEntityManager();
-        
-        List<Receipt> receipt = em.createNamedQuery("getAllReceipt", Receipt.class)
-                                .getResultList();
-        
-        long receipt_total = (long)em.createNamedQuery("getReceiptTotal", Long.class)
-                .getSingleResult();
-                
-        em.close();
-        
-        request.setAttribute("receipt", receipt);
-        request.setAttribute("receipt_total", receipt_total);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/receipt/index.jsp");
-        rd.forward(request, response);
 	    
 	    
+	    List<Receipt> receipt = em.createNamedQuery("getAllReceipt", Receipt.class)
+	                               .getResultList();
+	    
+	    long receipt_total = (long)em.createNamedQuery("getReceiptTotal", Long.class)
+	                                   .getSingleResult();
+	    
+	    em.close();
+	    
+	    request.setAttribute("reseipt", receipt);
+	    request.setAttribute("receipt_total", receipt_total);
+	   
+	    
+	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/receipt/index.jsp");
+	    rd.forward(request, response);
 	}
 
 }

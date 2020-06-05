@@ -83,13 +83,13 @@ public class LoginServlet extends HttpServlet {
 		    request.setAttribute("hasError", true);
 		    request.setAttribute("mail", mail);
 		    
-		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
+		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/login.jsp");
 		    rd.forward(request, response);
 		} else {
 		    request.getSession().setAttribute("login_user", u);
 		    
 		    request.getSession().setAttribute("flush", "ログインしました。");
-		    response.sendRedirect(request.getContextPath() + "/");
+		    response.sendRedirect(request.getContextPath() + "/receipt/index");
 		}
 	}
 
