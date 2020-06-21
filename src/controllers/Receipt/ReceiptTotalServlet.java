@@ -40,13 +40,13 @@ public class ReceiptTotalServlet extends HttpServlet {
 	                               .getResultList();
 	    
 	    long receipt_total = (long)em.createNamedQuery("getReceiptTotal", Long.class)
-	                                   .getSingleResult();
+                                        .getSingleResult();
 	    
 	    em.close();
 	    
 	    request.setAttribute("reseipt", receipt);
 	    request.setAttribute("receipt_total", receipt_total);
-	   
+	    
 	    
 	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/receipt/index.jsp");
 	    rd.forward(request, response);

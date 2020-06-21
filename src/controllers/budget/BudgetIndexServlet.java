@@ -37,10 +37,9 @@ public class BudgetIndexServlet extends HttpServlet {
 	    
 	    List<Budget> budget = em.createNamedQuery("getAllBudget", Budget.class)
 	                            .getResultList();
-	    response.getWriter().append(Integer.valueOf(budget.size()).toString());
-	    
+
 	    em.close();
-	    
+	   
 	    request.setAttribute("budget", budget);
 	    
 	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/index.jsp");

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getAllReceipt",
-            query = "SELECT r FROM Receipt AS r ORDER BY r.id DESC"
+            query = "SELECT r FROM Receipt AS r"
             ),
     @NamedQuery(
             name = "getReceiptCount",
@@ -24,8 +24,21 @@ import javax.persistence.Table;
             ),
     @NamedQuery(
             name = "getReceiptTotal",
-            query = "SELECT SUM(r.totalamount) FROM Receipt r"
+            query = "SELECT SUM(r.totalamount) FROM Receipt AS r"
             ),
+        @NamedQuery(
+                name = "SUMReceiptDay",
+                query = "SELECT new models.DTotal(FUNCTION('DATE_FORMAT',r.receipt_date, '%Y/%m/%d'), sum(r.totalamount)) FROM Receipt As r WHERE r.receipt_date BETWEEN :start AND :last GROUP BY FUNCTION('DATE_FORMAT', r.receipt_date, '%Y/%m/%d')"
+                ),
+        @NamedQuery(
+                name = "SUMReceiptMonth",
+                query = "SELECT new models.MTotal(FUNCTION('DATE_FORMAT',r.receipt_date, '%Y/%m'), sum(r.totalamount)) FROM Receipt As r WHERE r.receipt_date BETWEEN :start AND :last GROUP BY FUNCTION('DATE_FORMAT', r.receipt_date, '%Y/%m')"
+                ),
+        @NamedQuery(
+                name = "AllReceiptDay",
+                query = "SELECT new models.Ttotal(FUNCTION('DATE_FORMAT',r.receipt_date, '%Y/%m/%d'), r.totalamount, r.id, r.payment) FROM Receipt As r WHERE r.receipt_date = :today"
+                ),
+       
 })
 @Entity
 public class Receipt {

@@ -15,8 +15,17 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getAllBudget",
-            query = "SELECT b FROM Budget AS b ORDER BY b.id DESC"
+            query = "SELECT b FROM Budget AS b ORDER BY b"
             ),
+    @NamedQuery(
+            name = "getStartday",
+            query = "SELECT b.startday FROM Budget AS b WHERE b.id = 1"
+            ),
+    @NamedQuery(
+            name = "getBudget",
+            query = "SELECT b.budget FROM Budget AS b WHERE b.id = 1"
+            ),
+    
 })
 @Table(name = "budget")
 
@@ -30,7 +39,7 @@ public class Budget {
     private Integer budget;
     
     @Column(name = "startday", nullable = false)
-    private String startday;
+    private Integer startday;
     
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -54,11 +63,11 @@ public class Budget {
         this.budget = budget;
     }
 
-    public String getStartday() {
+    public Integer getStartday() {
         return startday;
     }
 
-    public void setStartday(String startday) {
+    public void setStartday(Integer startday) {
         this.startday = startday;
     }
 

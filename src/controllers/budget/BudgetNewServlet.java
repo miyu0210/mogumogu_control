@@ -30,9 +30,8 @@ public class BudgetNewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   request.setAttribute("_token", request.getSession().getId());
-	   
-	   request.setAttribute("budget", new Budget());
+	    request.setAttribute("_token", request.getSession().getId());
+        request.setAttribute("budget", new Budget());
 	   
 	   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/new.jsp");
 	   rd.forward(request, response);

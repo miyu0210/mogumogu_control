@@ -41,25 +41,25 @@ public class ReceiptCreateServlet extends HttpServlet {
 		    
 		    Date receipt_date = new Date(System.currentTimeMillis());
 		    String rd_str = request.getParameter("receipt_date");
-		             if(rd_str != null && !rd_str.equals("")) {
-		                 receipt_date = Date.valueOf(request.getParameter("receipt_date"));
-		             }
-		             r.setReceipt_date(receipt_date);
+		    if(rd_str != null && !rd_str.equals("")) {
+		        receipt_date = Date.valueOf(request.getParameter("receipt_date"));
+		    }
+		    r.setReceipt_date(receipt_date);
 		             
-		             r.setTotalamount(Integer.parseInt(request.getParameter("totalamount")));
-		             r.setPayment(request.getParameter("payment"));
+		    r.setTotalamount(Integer.parseInt(request.getParameter("totalamount")));
+		    r.setPayment(request.getParameter("payment"));
 		             
-		             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-		             r.setCreated_at(currentTime);
-		             r.setUpdated_at(currentTime);
+		    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		    r.setCreated_at(currentTime);
+		    r.setUpdated_at(currentTime);
 		             
-		             em.getTransaction().begin();
-		             em.persist(r);
-		             em.getTransaction().commit();
-		             em.close();
-		             request.getSession().setAttribute("flush", " 登録完了");
+		    em.getTransaction().begin();
+		    em.persist(r);
+		    em.getTransaction().commit();
+		    em.close();
+		    request.getSession().setAttribute("flush", " 登録完了");
 		             
-		             response.sendRedirect(request.getContextPath() + "/receipt/index");
+		    response.sendRedirect(request.getContextPath() + "/receipt/index");
 		             
 		            
 		}

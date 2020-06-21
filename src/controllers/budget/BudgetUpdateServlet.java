@@ -38,24 +38,18 @@ public class BudgetUpdateServlet extends HttpServlet {
 		    
 		    Budget b = em.find(Budget.class, (Integer)(request.getSession().getAttribute("budget_id")));
 		    
-		    Integer budget = Integer.parseInt(request.getParameter("budget"));
-		    b.setBudget(budget);
-		    
-		    String startday = request.getParameter("startday");
-		    b.setStartday(startday);
-		    
-		    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-		    b.setUpdated_at(currentTime);
+		    b.setBudget(Integer.parseInt(request.getParameter("budget")));
+		    b.setStartday(Integer.parseInt(request.getParameter("startday")));
+		    b.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 		    
 		    em.getTransaction().begin();
 		    em.getTransaction().commit();
 		    em.close();
+		    request.getSession().setAttribute("flush", "更新完了");
 		    
 		    request.getSession().removeAttribute("budget_id");
 		    
-		    response.sendRedirect(request.getContextPath() + "/budget/index");
-		    
+		    response.sendRedirect(request.getContextPath() + "/receipt/index");
 		}
 	}
-
 }

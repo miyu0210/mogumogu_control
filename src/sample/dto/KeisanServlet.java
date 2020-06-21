@@ -1,6 +1,7 @@
-package controllers.budget;
+package sample.dto;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -10,20 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Budget;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class BudgetShowServlet
+ * Servlet implementation class KeisanServlet
  */
-@WebServlet("/budget/show")
-public class BudgetShowServlet extends HttpServlet {
+@WebServlet("/keisan")
+public class KeisanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BudgetShowServlet() {
+    public KeisanServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,22 @@ public class BudgetShowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    response.setContentType("keisan/html; charset=UTF-8");
+	    
 	    EntityManager em = DBUtil.createEntityManager();
 	    
-	    Budget b = em.find(Budget.class, Integer.parseInt(request.getParameter("id")));
+	    List<Keisan> keisan = em.createQuery(
+	            "select new sample.dto.Keisan(r.receipt_date, r.totalamount))"
+	            + " from Receipt r group by r",Keisan.class).getResultList();
+	    
+	    for(Keisan k : keisan) {
+	        System.out.println(k.getM_total());
+	    }
 	    
 	    em.close();
 	    
-	    request.setAttribute("budget", b);
-	    request.setAttribute("_token", request.getSession().getId());
-	    
-	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/budget/show.jsp");
-	    rd.forward(request, response);
+	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/receipt/daytotal.jsp");
+        rd.forward(request, response);
 	}
 
 }

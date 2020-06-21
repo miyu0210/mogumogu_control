@@ -41,7 +41,7 @@ public class BudgetCreateServlet extends HttpServlet {
 		    Integer budget = Integer.parseInt(request.getParameter("budget"));
 		    b.setBudget(budget);
 		    
-		    String startday = request.getParameter("startday");
+		    Integer startday = Integer.parseInt(request.getParameter("startday"));
 		    b.setStartday(startday);
 		    
 		    Timestamp currentTime = new Timestamp(System.currentTimeMillis());

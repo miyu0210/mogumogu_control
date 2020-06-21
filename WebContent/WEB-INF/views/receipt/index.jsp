@@ -3,31 +3,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
-            <div id="flush_success">
-                <c:out value="${flush}"></c:out>
-            </div>
-        </c:if>
-        <h2>一覧</h2>
-        <h3>${receipt_total}</h3>
-        <table id="receipt_list">
-            <tbody>
-                <tr>
-                    <th class="receipt_date">日付</th>
-                    <th class="receipt_totalamount">金額</th>
-                    <th class="rreceipt_action">編集</th>
-                </tr>
-                <c:forEach var="receipt" items="${receipt}" varStatus="status">
-                    <tr class="row${status.count % 2}">
-                        <td class="receipt_date"><fmt:formatDate value='${receipt.receipt_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="recetipt_totalamount">${receipt.totalamount}</td>
-                        <td class="receipt_action"><a href="<c:url value='/receipt/show?id=${receipt.id}' />">詳細</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
 
-        <p><a href="<c:url value='/receipt/new' />">新規</a></p>
-
+       <form method="POST" action="<c:url value='/receipt/create' />">
+            <c:import url="_form.jsp" />
+       </form>
+        <div class="z-box">
+        <div class="box">
+        <span class ="box-title">予算</span>
+        <% Integer budget = (Integer) request.getAttribute("budget"); %>
+        <p>${budget}円</p>
+        </div>&nbsp;&nbsp;
+        <div class="box">
+        <span class="box-title">使用金額</span>
+        <c:forEach var="m_total" items="${m_total}">
+                   <p><c:out value="${m_total.sumM}"></c:out>円</p>
+        </c:forEach>
+        </div>&nbsp;&nbsp;
+        <div class="box">
+        <span class="box-title">残金</span>
+                   <p>${zan}円</p>
+        </div>
+        </div>
+        <br /><br />
+        
+        <c:import url="matome.jsp" />
+        
     </c:param>
 </c:import>
